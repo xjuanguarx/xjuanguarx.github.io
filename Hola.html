@@ -1,249 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Arquitecta Rous</title>
+  <meta charset="UTF-8" />
+  <title>Efecto Matrix Gabi/title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
+    html, body {
       margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background: url('fondo.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-      transition: background 0.5s ease;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: rgba(255, 255, 255, 0);
-      padding: 1rem 2rem;
-      backdrop-filter: blur(5px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    header img {
-      height: 60px;
-    }
-
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #faf9f9;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 2.5rem;
-    }
-
-    h5 {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 2.5rem;
-      color: #ffffffa8;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 2rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      transition: transform 0.4s, box-shadow 0.4s;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.5);
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(5px);
-    }
-
-    .custom-bg {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255,255,255,0.8);
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-      z-index: 20;
-    }
-
-    .custom-bg:hover {
-      background: rgba(255,255,255,1);
-    }
-
-    .contact {
-      background: rgba(255, 255, 255, 0.85);
-      padding: 2rem;
-      margin: 2rem auto;
-      max-width: 600px;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0);
-    }
-
-    .contact h2 {
-      margin-top: 0;
-    }
-
-    .contact input, .contact textarea {
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.5rem 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: border-color 0.3s;
-    }
-
-    .contact input:focus, .contact textarea:focus {
-      border-color: #666;
-      outline: none;
-    }
-
-    .contact button {
-      padding: 0.8rem 1.5rem;
-      border: none;
-      background-color: #333;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .contact button:hover {
-      background-color: #555;
-    }
-
-    /* Animación de bienvenida */
-    .welcome {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
+      padding: 0;
+      background: black;
+      overflow: hidden;
       height: 100%;
-      background-color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 9999;
-      transition: opacity 1s ease, visibility 1s ease;
     }
-
-    .welcome h2 {
-      font-size: 2.5rem;
-      color: #333;
-      margin: 0;
-      animation: fadeInUp 1.5s ease forwards;
+    canvas {
+      display: block;
     }
-
-    .welcome p {
-      font-size: 1.2rem;
-      color: #666;
-      margin-top: 1rem;
-      animation: fadeInUp 2s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .welcome.hide {
-      opacity: 0;
-      visibility: hidden;
+    .nombre {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #d1a1f4; /* Morado pastel */
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 48px;
+      text-align: center;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-
-  <!-- Animación de bienvenida -->
-  <div class="welcome" id="welcome">
-    <h2>Bienvenida</h2>
-    <p>Al mundo de la Arquitecta Rous</p>
-  </div>
-
-  <!-- Audio automático -->
-  <audio autoplay loop>
-    <source src="audio.mp3" type="audio/mpeg">
-    Tu navegador no soporta el audio.
-  </audio>
-
-  <header>
-    <img src="Logo1.png" alt="Logo"> <!-- Reemplaza "logo.png" -->
-  </header>
-
-  <h1>Mundo de Arquitectura</h1>
-
-  <section id="galeria" class="gallery">
-    <img src="foto1.jpg" alt="Proyecto 1">
-    <img src="foto2.jpg" alt="Proyecto 2">
-    <img src="Foto3.png" alt="Proyecto 3">
-    <img src="foto4.jpg" alt="Proyecto 4">
-    <img src="foto5.jpg" alt="Proyecto 5">
-  </section>
- <h5>Bueno rosa pasate por mucho este tiempo las reales desveladas pero esto aun no acaba de falta mas 
-  y dejame decearte lo mejor del mundo mundial esta pagina esta creada para que recuerdes un poquito 
-  de este ciclo y decearte lo mejor y nunca seas pesimista para mi siempre la mejor, aunq estare triste 
-ya no hablaremos pero tiempo al tiempo ya mucho texto :v</h5>
-  <footer>
-    &copy; 2025 Arquitecta Rosita - Pagina para la mas pro  
-  </footer>
+  <canvas id="matrix"></canvas>
+  <div class="nombre">Mejorate Gabi Leon</div>
 
   <script>
-    function changeBackground() {
-      const backgrounds = [
-        'url("fondo.jpg")',
-        'url("fondo2.jpg")',
-        'url("fondo3.jpg")',
-        'linear-gradient(135deg, #f0f0f0, #cccccc)',
-        'linear-gradient(135deg, #ffffff, #e0e0e0)'
-      ];
-      const index = Math.floor(Math.random() * backgrounds.length);
-      document.body.style.background = backgrounds[index];
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundRepeat = 'no-repeat';
-      document.body.style.backgroundAttachment = 'fixed';
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    // Ajustar tamaño
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    // Caracteres
+    const letters = "01";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+
+    // Drops
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      // Fondo con transparencia para efecto "caída"
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#d1a1f4"; // Color morado pastel
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Reiniciar al llegar abajo
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
     }
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('welcome').classList.add('hide');
-      }, 2500); 
+
+    setInterval(draw, 33);
+
+    // Redimensionar canvas al cambiar tamaño de ventana
+    window.addEventListener("resize", () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
     });
   </script>
-
 </body>
 </html>
