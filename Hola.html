@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Efecto Matrix Gabi/title>
+  <title>Para ti</title>
   <style>
     html, body {
       margin: 0;
@@ -23,32 +23,31 @@
       font-family: 'Courier New', Courier, monospace;
       font-size: 48px;
       text-align: center;
+      white-space: nowrap;
       z-index: 1;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
-  <div class="nombre">Mejorate Gabi Leon</div>
+  <div class="nombre">Gabi Leon Espero que te sanes pronto uu</div>
 
   <script>
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
 
-    // Ajustar tamaño
+    // Ajustar tamaño inicial
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    // Caracteres
-    const letters = "01";
+    const letters = "アァカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const fontSize = 16;
     const columns = canvas.width / fontSize;
 
-    // Drops
     const drops = Array(Math.floor(columns)).fill(1);
 
     function draw() {
-      // Fondo con transparencia para efecto "caída"
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -59,7 +58,6 @@
         const text = letters[Math.floor(Math.random() * letters.length)];
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        // Reiniciar al llegar abajo
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
@@ -69,7 +67,6 @@
 
     setInterval(draw, 33);
 
-    // Redimensionar canvas al cambiar tamaño de ventana
     window.addEventListener("resize", () => {
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
